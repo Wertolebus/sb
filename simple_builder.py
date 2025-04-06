@@ -3,9 +3,9 @@
 
 class Task():
     "Task class, that contains task itself and args"
-    def __init__(self, task):
+    def __init__(self, cmd):
         self.args = []
-        self.task = task
+        self.cmd = cmd
 
     def AddFlag(self, flag = ""):
         """
@@ -31,7 +31,7 @@ class Task():
         Return task as list
         e.g. ['g++', 'main.cpp', '-o', 'app']
         """
-        full_task = [self.task]
+        full_task = [self.cmd]
         full_task.extend(self.args)
         return full_task
     
@@ -49,7 +49,7 @@ class Builder():
         return self
 
     def CmdSync(self):
-        "Run commands synchronously"
+        "Run tasks synchronously"
         import subprocess as sp
         for task in self.tasks:
             ft = task.GetFullTask()
@@ -57,9 +57,10 @@ class Builder():
             if proc.stdout: print("[SB-Sync] STDOUT > ", proc.stdout)
             elif proc.stderr: print("[SB-Sync] STDERR > ", proc.stderr)
             if proc.returncode: print("\n[SB-Sync] EXITCODE > ", proc.returncode)
+        return self
 
     def CmdAsync(self):
-        "Run commands asynchronously"
+        "Run tasks asynchronously"
         import subprocess as sp
         if not len(self.tasks): return
         for task in self.tasks:
@@ -68,3 +69,5 @@ class Builder():
             if proc.stdout: print("[SB-Async] STDOUT >", proc.stdout)
             elif proc.stderr: print("[SB-Async] STDERR >", proc.stderr)
             if proc.returncode: print("\n[SB-Async] EXITCODE >", proc.returncode)
+        return self
+        
