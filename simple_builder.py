@@ -1,6 +1,8 @@
 # Simple library to build stuff
 # (c) zboxjpg
 
+from datetime import datetime
+
 class Task():
     "Task class, that contains task itself and args"
     def __init__(self, cmd):
@@ -53,10 +55,11 @@ class Builder():
         import subprocess as sp
         for task in self.tasks:
             ft = task.GetFullTask()
+            print("[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "RUNNING > ", " ".join(ft))
             proc = sp.run(ft)
-            if proc.stdout: print("[SB-Sync] STDOUT > ", proc.stdout)
-            elif proc.stderr: print("[SB-Sync] STDERR > ", proc.stderr)
-            if proc.returncode: print("\n[SB-Sync] EXITCODE > ", proc.returncode)
+            if proc.stdout: print("[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "STDOUT > ", proc.stdout)
+            elif proc.stderr: print("[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "STDERR > ", proc.stderr)
+            if proc.returncode: print("\n[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "EXITCODE > ", proc.returncode)
         return self
 
     def CmdAsync(self):
@@ -65,9 +68,10 @@ class Builder():
         if not len(self.tasks): return
         for task in self.tasks:
             ft = task.GetFullTask()
+            print("[SB-Async]", datetime.now().strftime("%H.%M.%S"), "RUNNING > ", " ".join(ft))
             proc = sp.Popen(ft)
-            if proc.stdout: print("[SB-Async] STDOUT >", proc.stdout)
-            elif proc.stderr: print("[SB-Async] STDERR >", proc.stderr)
-            if proc.returncode: print("\n[SB-Async] EXITCODE >", proc.returncode)
+            if proc.stdout: print("[SB-Async]", datetime.now().strftime("%H.%M.%S"), "STDOUT >", proc.stdout)
+            elif proc.stderr: print("[SB-Async]", datetime.now().strftime("%H.%M.%S"), "STDERR >", proc.stderr)
+            if proc.returncode: print("\n[SB-Async]", datetime.now().strftime("%H.%M.%S"), "EXITCODE >", proc.returncode)
         return self
         
