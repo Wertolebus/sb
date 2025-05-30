@@ -4,14 +4,20 @@
 from datetime import datetime
 
 class Task():
-    "Task class, that contains task itself and args"
-    def __init__(self, cmd):
+    """Task class, that contains task itself and args
+    
+    cmd -> command
+
+    com -> comment (def. None)"""
+    def __init__(self, cmd, com = None):
         self.args = []
         self.cmd = cmd
+        self.com = com
 
     def AddFlag(self, flag = ""):
         """
         Add flag to task
+        
         e.g. .AddArg("-v")
         """
         self.args.append(flag)
@@ -21,6 +27,7 @@ class Task():
     def AddArg(self, arg = "", flag = ""):
         """
         Add argument to task
+
         e.g. .AddArg("main.cpp") OR .AddArg("app", "-o")
         """
         if flag: self.args.extend([flag, arg])
@@ -31,6 +38,7 @@ class Task():
     def GetFullTask(self):
         """
         Return task as list
+
         e.g. ['g++', 'main.cpp', '-o', 'app']
         """
         full_task = [self.cmd]
@@ -45,6 +53,7 @@ class Builder():
     def AddTask(self, task : Task):
         """
         Add task to builder
+
         e.g. .AddTask(Task("g++").AddArg("main.cpp").AddArg("app", "-o"))
         """
         self.tasks.append(task)
@@ -55,7 +64,8 @@ class Builder():
         import subprocess as sp
         for task in self.tasks:
             ft = task.GetFullTask()
-            print("[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "RUNNING > ", " ".join(ft))
+            if task.com: print(task.com)
+            else: print("[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "RUNNING > ", " ".join(ft))
             proc = sp.run(ft)
             if proc.stdout: print("[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "STDOUT > ", proc.stdout)
             elif proc.stderr: print("[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "STDERR > ", proc.stderr)
@@ -68,7 +78,8 @@ class Builder():
         if not len(self.tasks): return
         for task in self.tasks:
             ft = task.GetFullTask()
-            print("[SB-Async]", datetime.now().strftime("%H.%M.%S"), "RUNNING > ", " ".join(ft))
+            if task.com: print(task.com)
+            else: print("[SB-Async]", datetime.now().strftime("%H.%M.%S"), "RUNNING > ", " ".join(ft))
             proc = sp.Popen(ft)
             if proc.stdout: print("[SB-Async]", datetime.now().strftime("%H.%M.%S"), "STDOUT >", proc.stdout)
             elif proc.stderr: print("[SB-Async]", datetime.now().strftime("%H.%M.%S"), "STDERR >", proc.stderr)
