@@ -11,8 +11,8 @@ Builder().AddTask(Task("python").AddArg("main.py").AddFlag("-v")).CmdSync()
 # Documentation
 
 ## class `Task(cmd)`
-param `cmd` - command to run (e.g. "python", "gcc", etc.)
-
+- param `cmd` - command to run (e.g. "python", "gcc", etc.)
+- param `com` - print comment instead of standard log
 
 func `AddFlag(flag)` - add flag to task (e.g. `.AddFlag("-v")`). This is a fluent method that returns the instance itself for chaining.
 
