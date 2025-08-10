@@ -105,11 +105,7 @@ class Builder():
             if task.com: print(task.com)
             else: print("[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "RUNNING > ", " ".join(ft))
             proc = sp.run(ft)
-            if proc.stdout: 
-                print("[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "STDOUT > ", proc.stdout)
-                print("\n[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "EXITCODE > ", proc.returncode)
-            elif proc.stderr: 
-                print("[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "STDERR > ", proc.stderr)
+            if proc.returncode:
                 print("\n[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "EXITCODE > ", proc.returncode)
                 return Status.ERROR
         return Status.OK
@@ -123,12 +119,8 @@ class Builder():
             if task.com: print(task.com)
             else: print("[SB-Async]", datetime.now().strftime("%H.%M.%S"), "RUNNING > ", " ".join(ft))
             proc = sp.Popen(ft)
-            if proc.stdout: 
-                print("[SB-Async]", datetime.now().strftime("%H.%M.%S"), "STDOUT >", proc.stdout)
-                print("\n[SB-Async]", datetime.now().strftime("%H.%M.%S"), "EXITCODE >", proc.returncode)
-            elif proc.stderr: 
-                print("[SB-Async]", datetime.now().strftime("%H.%M.%S"), "STDERR >", proc.stderr)
-                print("\n[SB-Async]", datetime.now().strftime("%H.%M.%S"), "EXITCODE >", proc.returncode)
+            if proc.returncode:
+                print("\n[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "EXITCODE > ", proc.returncode)
                 return Status.ERROR
         return Status.OK
         
