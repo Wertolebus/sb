@@ -62,7 +62,7 @@ func `GetPlatform()` - get system platform
 | FreeBSD 8                      | Platform.FREEBSD8 |
 | FreeBSD N                      | Platform.FREEBSDN |
 
-## class `Task(cmd)`
+## class `Task(cmd, com)`
 - param `cmd` - command to run (e.g. "python", "gcc", etc.)
 - param `com` - print comment instead of standard log
 
