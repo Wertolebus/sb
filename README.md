@@ -50,3 +50,22 @@ t.AddArg("main.py")
 b.AddTask(t)
 b.CmdSync()
 ```
+## Functions
+func `GetPlatform()` - get system platform
+
+| System                         | Value             |
+|--------------------------------|-------------------|
+| Linux                          | Platform.LINUX    |
+| Windows                        | Platform.WIN32    |
+| Windows/Cygwin                 | Platform.CYGWIN   |
+| Windows/MSYS2<br>Windows/MinGW | Platform.MSYS     |
+| Mac OS X                       | Platform.MACOSX   |
+| OS/2                           | Platform.OS2      |
+| OS/2 EMX                       | Platform.OS2EMX   |
+| RiscOS                         | Platform.RISCOS   |
+| AtheOS                         | Platform.ATHEOS   |
+| FreeBSD 6                      | Platform.FREEBSD6 |
+| FreeBSD 7                      | Platform.FREEBSD7 |
+| FreeBSD 8                      | Platform.FREEBSD8 |
+| FreeBSD N                      | Platform.FREEBSDN |
+
