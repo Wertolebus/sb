@@ -58,6 +58,7 @@ func `GetFullTask()` - return task as list (e.g. `.GetFullTask()` will return `[
 ## class `Builder()`
 func `AddTask(task)` - add task to builder. This is a fluent method that returns the instance itself for chaining.
 
+func `ClearTasks()` - remove all tasks. This is a fluent method that returns the instance itself for chaining.
 
 func `CmdSync()` - run tasks synchronously. This is a fluent method that returns the instance itself for chaining.
 
