@@ -37,6 +37,10 @@ def GetPlatform():
         case "freebsdN": return Platform.FREEBSDN
         case _: raise Exception("Undefined platform `%s`(???)" % (sys.platform))
 
+class Status(Enum):
+    OK      = auto()
+    ERROR   = auto()
+
 class Task():
     """Task class, that contains task itself and args
     
@@ -101,10 +105,14 @@ class Builder():
             if task.com: print(task.com)
             else: print("[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "RUNNING > ", " ".join(ft))
             proc = sp.run(ft)
-            if proc.stdout: print("[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "STDOUT > ", proc.stdout)
-            elif proc.stderr: print("[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "STDERR > ", proc.stderr)
-            if proc.returncode: print("\n[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "EXITCODE > ", proc.returncode)
-        return self
+            if proc.stdout: 
+                print("[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "STDOUT > ", proc.stdout)
+                print("\n[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "EXITCODE > ", proc.returncode)
+            elif proc.stderr: 
+                print("[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "STDERR > ", proc.stderr)
+                print("\n[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "EXITCODE > ", proc.returncode)
+                return Status.ERROR
+        return Status.OK
 
     def CmdAsync(self):
         "Run tasks asynchronously"
@@ -115,8 +123,12 @@ class Builder():
             if task.com: print(task.com)
             else: print("[SB-Async]", datetime.now().strftime("%H.%M.%S"), "RUNNING > ", " ".join(ft))
             proc = sp.Popen(ft)
-            if proc.stdout: print("[SB-Async]", datetime.now().strftime("%H.%M.%S"), "STDOUT >", proc.stdout)
-            elif proc.stderr: print("[SB-Async]", datetime.now().strftime("%H.%M.%S"), "STDERR >", proc.stderr)
-            if proc.returncode: print("\n[SB-Async]", datetime.now().strftime("%H.%M.%S"), "EXITCODE >", proc.returncode)
-        return self
+            if proc.stdout: 
+                print("[SB-Async]", datetime.now().strftime("%H.%M.%S"), "STDOUT >", proc.stdout)
+                print("\n[SB-Async]", datetime.now().strftime("%H.%M.%S"), "EXITCODE >", proc.returncode)
+            elif proc.stderr: 
+                print("[SB-Async]", datetime.now().strftime("%H.%M.%S"), "STDERR >", proc.stderr)
+                print("\n[SB-Async]", datetime.now().strftime("%H.%M.%S"), "EXITCODE >", proc.returncode)
+                return Status.ERROR
+        return Status.OK
         
