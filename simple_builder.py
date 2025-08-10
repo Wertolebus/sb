@@ -2,6 +2,40 @@
 # (c) zboxjpg
 
 from datetime import datetime
+from enum import Enum, auto
+import sys
+
+class Platform(Enum):
+    LINUX    = auto()
+    WIN32    = auto()
+    CYGWIN   = auto()
+    MSYS     = auto()
+    MACOSX   = auto()
+    OS2      = auto()
+    OS2EMX   = auto()
+    RISCOS   = auto()
+    ATHEOS   = auto()
+    FREEBSD6 = auto()
+    FREEBSD7 = auto()
+    FREEBSD8 = auto()
+    FREEBSDN = auto()
+
+def GetPlatform():
+    match sys.platform:
+        case "linux" | "linux2": return Platform.LINUX
+        case "win32": return Platform.WIN32
+        case "cygwin": return Platform.CYGWIN
+        case "msys": return Platform.MSYS
+        case "darwin": return Platform.MACOSX
+        case "os2": return Platform.OS2
+        case "os2emx": return Platform.OS2EMX
+        case "riscos": return Platform.RISCOS
+        case "atheos": return Platform.ATHEOS
+        case "freebsd6": return Platform.FREEBSD6
+        case "freebsd7": return Platform.FREEBSD7
+        case "freebsd8": return Platform.FREEBSD8
+        case "freebsdN": return Platform.FREEBSDN
+        case _: raise Exception("Undefined platform `%s`(???)" % (sys.platform))
 
 class Task():
     """Task class, that contains task itself and args
@@ -85,39 +119,4 @@ class Builder():
             elif proc.stderr: print("[SB-Async]", datetime.now().strftime("%H.%M.%S"), "STDERR >", proc.stderr)
             if proc.returncode: print("\n[SB-Async]", datetime.now().strftime("%H.%M.%S"), "EXITCODE >", proc.returncode)
         return self
-from enum import Enum, auto
-import sys
-
-class Platform(Enum):
-    LINUX    = auto()
-    WIN32    = auto()
-    CYGWIN   = auto()
-    MSYS     = auto()
-    MACOSX   = auto()
-    OS2      = auto()
-    OS2EMX   = auto()
-    RISCOS   = auto()
-    ATHEOS   = auto()
-    FREEBSD6 = auto()
-    FREEBSD7 = auto()
-    FREEBSD8 = auto()
-    FREEBSDN = auto()
-
-def GetPlatform():
-    match sys.platform:
-        case "linux" | "linux2": return Platform.LINUX
-        case "win32": return Platform.WIN32
-        case "cygwin": return Platform.CYGWIN
-        case "msys": return Platform.MSYS
-        case "darwin": return Platform.MACOSX
-        case "os2": return Platform.OS2
-        case "os2emx": return Platform.OS2EMX
-        case "riscos": return Platform.RISCOS
-        case "atheos": return Platform.ATHEOS
-        case "freebsd6": return Platform.FREEBSD6
-        case "freebsd7": return Platform.FREEBSD7
-        case "freebsd8": return Platform.FREEBSD8
-        case "freebsdN": return Platform.FREEBSDN
-        case _: raise Exception("Undefined platform `%s`(???)" % (sys.platform))
-
         

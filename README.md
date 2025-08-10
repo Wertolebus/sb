@@ -5,10 +5,43 @@ Simple builder is simple python library which I made for myself to provide simpl
 ```py
 from simple_builder import *
 
-Builder().AddTask(Task("python").AddArg("main.py").AddFlag("-v")).CmdSync()
+platform = GetPlatform()
+cmd = ""
+
+# defining command for specific OS
+if platform == Platform.WIN32:
+    cmd = "python"
+else:
+    cmd = "python3"
+
+b = Builder()
+t = Task(cmd)
+t.AddFlag("-v")
+t.AddArg("main.py")
+b.AddTask(t)
+b.CmdSync()
 ```
 
 # Documentation
+
+## Functions
+func `GetPlatform()` - get system platform
+
+| System                         | Value             |
+|--------------------------------|-------------------|
+| Linux                          | Platform.LINUX    |
+| Windows                        | Platform.WIN32    |
+| Windows/Cygwin                 | Platform.CYGWIN   |
+| Windows/MSYS2<br>Windows/MinGW | Platform.MSYS     |
+| Mac OS X                       | Platform.MACOSX   |
+| OS/2                           | Platform.OS2      |
+| OS/2 EMX                       | Platform.OS2EMX   |
+| RiscOS                         | Platform.RISCOS   |
+| AtheOS                         | Platform.ATHEOS   |
+| FreeBSD 6                      | Platform.FREEBSD6 |
+| FreeBSD 7                      | Platform.FREEBSD7 |
+| FreeBSD 8                      | Platform.FREEBSD8 |
+| FreeBSD N                      | Platform.FREEBSDN |
 
 ## class `Task(cmd)`
 - param `cmd` - command to run (e.g. "python", "gcc", etc.)
@@ -30,42 +63,4 @@ func `CmdSync()` - run tasks synchronously. This is a fluent method that returns
 
 
 func `CmdAsync()` - run tasks asynchronously. This is a fluent method that returns the instance itself for chaining.
-# Quickstart
-```py
-from simple_builder import *
-
-platform = GetPlatform()
-cmd = ""
-
-# defining command for specific OS
-if platform == Platform.WIN32:
-    cmd = "python"
-else:
-    cmd = "python3"
-
-b = Builder()
-t = Task(cmd)
-t.AddFlag("-v")
-t.AddArg("main.py")
-b.AddTask(t)
-b.CmdSync()
-```
-## Functions
-func `GetPlatform()` - get system platform
-
-| System                         | Value             |
-|--------------------------------|-------------------|
-| Linux                          | Platform.LINUX    |
-| Windows                        | Platform.WIN32    |
-| Windows/Cygwin                 | Platform.CYGWIN   |
-| Windows/MSYS2<br>Windows/MinGW | Platform.MSYS     |
-| Mac OS X                       | Platform.MACOSX   |
-| OS/2                           | Platform.OS2      |
-| OS/2 EMX                       | Platform.OS2EMX   |
-| RiscOS                         | Platform.RISCOS   |
-| AtheOS                         | Platform.ATHEOS   |
-| FreeBSD 6                      | Platform.FREEBSD6 |
-| FreeBSD 7                      | Platform.FREEBSD7 |
-| FreeBSD 8                      | Platform.FREEBSD8 |
-| FreeBSD N                      | Platform.FREEBSDN |
 
