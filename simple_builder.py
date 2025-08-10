@@ -90,6 +90,7 @@ class Builder():
 
     def ClearTasks(self):
         self.tasks = []
+        return self
 
     def AddTask(self, task : Task):
         """
