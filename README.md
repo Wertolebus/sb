@@ -62,7 +62,7 @@ func `GetPlatform()` - get system platform
 | FreeBSD 8                      | Platform.FREEBSD8 |
 | FreeBSD N                      | Platform.FREEBSDN |
 
-## class `Task(cmd)`
+## class `Task(cmd, com)`
 - param `cmd` - command to run (e.g. "python", "gcc", etc.)
 - param `com` - print comment instead of standard log
 
@@ -80,3 +80,4 @@ func `ClearTasks()` - remove all tasks. This is a fluent method that returns the
 func `CmdSync()` - run tasks synchronously. This is a fluent method that returns the instance itself for chaining.
 
 func `CmdAsync()` - run tasks asynchronously. This is a fluent method that returns the instance itself for chaining.
+
