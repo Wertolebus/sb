@@ -30,3 +30,23 @@ func `CmdSync()` - run tasks synchronously. This is a fluent method that returns
 
 
 func `CmdAsync()` - run tasks asynchronously. This is a fluent method that returns the instance itself for chaining.
+# Quickstart
+```py
+from simple_builder import *
+
+platform = GetPlatform()
+cmd = ""
+
+# defining command for specific OS
+if platform == Platform.WIN32:
+    cmd = "python"
+else:
+    cmd = "python3"
+
+b = Builder()
+t = Task(cmd)
+t.AddFlag("-v")
+t.AddArg("main.py")
+b.AddTask(t)
+b.CmdSync()
+```
