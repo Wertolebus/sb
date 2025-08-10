@@ -88,6 +88,9 @@ class Builder():
     def __init__(self):
         self.tasks : list[Task] = []
 
+    def ClearTasks(self):
+        self.tasks = []
+
     def AddTask(self, task : Task):
         """
         Add task to builder
