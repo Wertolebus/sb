@@ -101,30 +101,15 @@ class Builder():
         self.tasks.append(task)
         return self
 
-    def CmdSync(self):
-        "Run tasks synchronously"
+    def CMDRun(self):
+        "Run tasks"
         import subprocess as sp
         for task in self.tasks:
             ft = task.GetFullTask()
             if task.com: print(task.com)
-            else: print("[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "RUNNING > ", " ".join(ft))
+            else: print("[SB-CMD]", datetime.now().strftime("%H.%M.%S"), "RUNNING > ", " ".join(ft))
             proc = sp.run(ft)
             if proc.returncode:
-                print("\n[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "EXITCODE > ", proc.returncode)
+                print("\n[SB-CMD]", datetime.now().strftime("%H.%M.%S"), "EXITCODE > ", proc.returncode)
                 return Status.ERROR
         return Status.OK
-
-    def CmdAsync(self):
-        "Run tasks asynchronously"
-        import subprocess as sp
-        if not len(self.tasks): return
-        for task in self.tasks:
-            ft = task.GetFullTask()
-            if task.com: print(task.com)
-            else: print("[SB-Async]", datetime.now().strftime("%H.%M.%S"), "RUNNING > ", " ".join(ft))
-            proc = sp.Popen(ft)
-            if proc.returncode:
-                print("\n[SB-Sync]", datetime.now().strftime("%H.%M.%S"), "EXITCODE > ", proc.returncode)
-                return Status.ERROR
-        return Status.OK
-        

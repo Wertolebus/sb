@@ -19,7 +19,7 @@ t = Task(cmd)
 t.AddFlag("-v")
 t.AddArg("main.py")
 b.AddTask(t)
-b.CmdSync()
+b.CMDRun()
 ```
 
 ## Working with `Status`
@@ -35,10 +35,10 @@ t_run = Task("./main")
 b = Builder()
 b.AddTask(t_compile)
 
-if b.CmdSync() == Status.OK:
+if b.CMDRun() == Status.OK:
     b.ClearTasks()
     b.AddTask(t_run)
-    b.CmdSync()
+    b.CMDRun()
 ```
 
 # Documentation
@@ -77,6 +77,4 @@ func `AddTask(task)` - add task to builder. This is a fluent method that returns
 
 func `ClearTasks()` - remove all tasks. This is a fluent method that returns the instance itself for chaining.
 
-func `CmdSync()` - run tasks synchronously. This is a fluent method that returns the instance itself for chaining.
-
-func `CmdAsync()` - run tasks asynchronously. This is a fluent method that returns the instance itself for chaining.
+func `CMDRun()` - run tasks synchronously. This is a fluent method that returns the instance itself for chaining.
