@@ -4,6 +4,7 @@
 from datetime import datetime
 from enum import Enum, auto
 import sys
+import time
 
 class Platform(Enum):
     LINUX    = auto()
@@ -103,13 +104,18 @@ class Builder():
 
     def CMDRun(self):
         "Run tasks"
+        start_time = time.time()
         import subprocess as sp
         for task in self.tasks:
             ft = task.GetFullTask()
             if task.com: print(task.com)
-            else: print("[SB-CMD]", datetime.now().strftime("%H.%M.%S"), "RUNNING > ", " ".join(ft))
+            else: 
+                print("[SB-CMD]", datetime.now().strftime("%H.%M.%S"), "RUNNING > ", " ".join(ft))
             proc = sp.run(ft)
+            res_time = time.time() - start_time
             if proc.returncode:
                 print("\n[SB-CMD]", datetime.now().strftime("%H.%M.%S"), "EXITCODE > ", proc.returncode)
+                print(f"[SB-CMD] Build finished in just {res_time:.3f}s")
                 return Status.ERROR
+            print(f"[SB-CMD] Build finished in just {res_time:.3f}s")
         return Status.OK
