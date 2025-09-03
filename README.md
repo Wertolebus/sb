@@ -1,10 +1,15 @@
 ﻿# SimpleBuilder
 Simple builder is simple python library which I made for myself to provide simple building operations *(and not use .sh/.bat files)*.
 
+# Installation
+```bash
+pip install sbuilder
+```
+
 # Examples
 ## Running an OS specific command
 ```py
-from simple_builder import *
+from sbuilder import *
 
 platform = GetPlatform()
 cmd = ""
@@ -24,7 +29,7 @@ b.CMDRun()
 
 ## Working with `Status`
 ```py
-from simple_builder import *
+from sbuilder import *
 
 t_compile = Task("gcc")
 t_compile.AddArg("main", "-o")
@@ -78,3 +83,4 @@ func `AddTask(task)` - add task to builder. This is a fluent method that returns
 func `ClearTasks()` - remove all tasks. This is a fluent method that returns the instance itself for chaining.
 
 func `CMDRun()` - run tasks synchronously. This is a fluent method that returns the instance itself for chaining.
+
