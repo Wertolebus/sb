@@ -1,5 +1,5 @@
 ﻿# SimpleBuilder
-Simple builder is simple python library which I made for myself to provide simple building operations *(and not use .sh/.bat files)*.
+**SimpleBuilder** is simple python library which I made for myself to provide simple building operations *(and not use .sh/.bat files)*.
 
 # Installation
 ```bash
@@ -83,4 +83,5 @@ func `AddTask(task)` - add task to builder. This is a fluent method that returns
 func `ClearTasks()` - remove all tasks. This is a fluent method that returns the instance itself for chaining.
 
 func `CMDRun()` - run tasks synchronously. This is a fluent method that returns the instance itself for chaining.
+
 
