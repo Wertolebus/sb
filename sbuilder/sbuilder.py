@@ -42,6 +42,10 @@ class Status(Enum):
     OK      = auto()
     ERROR   = auto()
 
+def CMDOut(*cmd):
+    import subprocess as sp
+    return sp.check_output(cmd, text=True).strip()
+
 class Task():
     """Task class, that contains task itself and args
     
@@ -59,7 +63,7 @@ class Task():
         
         e.g. .AddArg("-v")
         """
-        self.args.append(flag)
+        self.args.append(str(flag))
 
         return self
     
@@ -69,8 +73,8 @@ class Task():
 
         e.g. .AddArg("main.cpp") OR .AddArg("app", "-o")
         """
-        if flag: self.args.extend([flag, arg])
-        else: self.args.append(arg)
+        if flag: self.args.extend([str(flag), str(arg)])
+        else: self.args.append(str(arg))
 
         return self
 
@@ -104,9 +108,9 @@ class Builder():
 
     def CMDRun(self):
         "Run tasks"
-        start_time = time.time()
         import subprocess as sp
         for task in self.tasks:
+            start_time = time.time()
             ft = task.GetFullTask()
             if task.com: print(task.com)
             else: 
