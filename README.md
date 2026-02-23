@@ -85,6 +85,6 @@ func `ClearTasks()` - remove all tasks. This is a fluent method that returns the
 func `CMDRun()` - run tasks synchronously. This is a fluent method that returns the instance itself for chaining.
 
 # TODO:
-- [ ] Make pathlib work with sbuilder
+- [ ] Make pathlib.Path work with sbuilder
 - [ ] Make function which return output from task
 - [ ] Fix time
