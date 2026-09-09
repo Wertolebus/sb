@@ -3,6 +3,7 @@
 
 from datetime import datetime
 from enum import Enum, auto
+from pathlib import Path
 import sys
 import time
 
@@ -57,24 +58,13 @@ class Task():
         self.cmd = cmd
         self.com = com
 
-    def AddFlag(self, flag = ""):
-        """
-        Add flag to task
-        
-        e.g. .AddArg("-v")
-        """
-        self.args.append(str(flag))
-
-        return self
-    
-    def AddArg(self, arg = "", flag = ""):
+    def AddArgs(self, *args : str | Path):
         """
         Add argument to task
-
-        e.g. .AddArg("main.cpp") OR .AddArg("app", "-o")
+        
+        e.g. .AddArgs("-o", "app", "-O2", etc.)
         """
-        if flag: self.args.extend([str(flag), str(arg)])
-        else: self.args.append(str(arg))
+        for el in args: self.args.append(el)
 
         return self
 
