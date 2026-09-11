@@ -3,7 +3,6 @@
 
 from datetime import datetime
 from enum import Enum, auto
-from pathlib import Path
 import sys
 import time
 
@@ -58,7 +57,7 @@ class Task():
         self.cmd = cmd
         self.com = com
 
-    def AddArgs(self, *args : str | Path):
+    def AddArgs(self, *args):
         """
         Add argument to task
         
